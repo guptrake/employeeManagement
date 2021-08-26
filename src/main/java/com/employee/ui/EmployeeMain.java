@@ -5,6 +5,10 @@
  */
 package com.employee.ui;
 
+import javax.swing.JOptionPane;
+
+import com.employee.service.EmployeeServiceImpl;
+
 /**
  *
  * @author sk036
@@ -709,7 +713,16 @@ public class EmployeeMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+    	if (ssn_delete.getText().length() == 0 || ssn_delete.getText().length() < 9) {
+			JOptionPane.showMessageDialog(null, "Please enter 9 digit valid SSN");
+		} else {
+			EmployeeServiceImpl obj = new EmployeeServiceImpl();
+			if(obj.deleteEmployee(ssn_delete.getText())==1) {
+				JOptionPane.showMessageDialog(null, "Deleted successfully");
+			}else {
+				JOptionPane.showMessageDialog(null, "SSN does not exist, enter valid ssn");
+			}
+		}
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

@@ -12,10 +12,10 @@ public class DataSource {
 
 	  public DataSource()
 	  {
-	    //bdSource.setDriverClassName("org.postgresql.Driver");
-	    bdSource.setUrl("jdbc:postgresql://localhost/postgres?user=postgres&password=admin&currentSchema=public");
-	   // bdSource.setUsername("root");
-	    //bdSource.setPassword("root");
+			bdSource.setDriverClassName("org.h2.Driver");
+			bdSource.setUrl("jdbc:h2:~/test");
+			bdSource.setUsername("sa");
+			bdSource.setPassword("");
 	  }
 
 	  public Connection createConnection()
