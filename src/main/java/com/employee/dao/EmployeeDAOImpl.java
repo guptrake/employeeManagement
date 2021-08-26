@@ -12,12 +12,45 @@ import com.employee.dto.Employee;
 
 public class EmployeeDAOImpl implements IEmployeeDAO {
 
-	//@Override
+	// @Override
 	public void addEmployee(Employee emp) {
 
 	}
 
-	//@Override
+	public Integer deleteEmployee(String ssn) {
+		DataSource dataSource = new DataSource();
+		Connection con = dataSource.createConnection();
+		Statement stmt = null;
+		ResultSet rs = null;
+		Integer deleteCount = 0;
+		try {
+			String query = "DELETE FROM EMPLOYEE WHERE SSN =" + ssn;
+			stmt = con.createStatement();
+			deleteCount = stmt.executeUpdate(query);
+			return deleteCount;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (Exception exe) {
+				exe.printStackTrace();
+			}
+
+		}
+		return deleteCount;
+
+	}
+
+	// @Override
 	public List<Employee> listAllEmployees() {
 		DataSource dataSource = new DataSource();
 		Connection con = dataSource.createConnection();
@@ -31,7 +64,7 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 			while (rs.next()) {
 				Employee employee = new Employee();
 				employee.setSsn(rs.getString("ssn"));
-				
+
 				employeeList.add(employee);
 			}
 		} catch (SQLException e) {
